@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="halloween">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Phatcharaphon Chairangsi</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fonts: Kanit & Creepster (Halloween Font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Creepster&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Icons: Devicon -->
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <!-- Tailwind CSS & daisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Vue.js 3 (CDN) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        html,
+        body {
+            font-family: 'Kanit', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23333333' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        h1,
+        h2,
+        h3,
+        .brand-font {
+            font-family: 'Creepster', cursive;
+            letter-spacing: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f28c18;
+            /* Halloween Orange */
+            border-radius: 6px;
+            border: 3px solid #0f0f0f;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateX(-10vw) translateY(0) scale(0.5);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateX(50vw) translateY(-50px) scale(1);
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateX(110vw) translateY(20px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .bat-1 {
+            animation: fly 15s linear infinite;
+            top: 20%;
+        }
+
+        .bat-2 {
+            animation: fly 20s linear infinite;
+            animation-delay: 5s;
+            top: 40%;
+        }
+
+        .bat-3 {
+            animation: fly 12s linear infinite;
+            animation-delay: 2s;
+            top: 10%;
+        }
+
+        .card-hover:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 20px rgba(242, 140, 24, 0.6);
+            border-color: #f28c18;
+        }
+
+        .spooky-text-shadow {
+            text-shadow: 2px 2px 0px #000, 0 0 10px #f28c18;
+        }
+
+        /* --- NEW: Animated Waves CSS --- */
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15vh;
+            margin-bottom: -1px;
+            /* Fix gap */
+            min-height: 100px;
+            max-height: 150px;
+        }
+
+        .parallax>use {
+            animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+        }
+
+        .parallax>use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+            fill: rgba(30, 30, 30, 0.7);
+            /* Opacity layer */
+        }
+
+        .parallax>use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+            fill: rgba(30, 30, 30, 0.5);
+            /* Opacity layer */
+        }
+
+        .parallax>use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+            fill: rgba(30, 30, 30, 0.3);
+            /* Opacity layer */
+        }
+
+        .parallax>use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+            /* Main fill matches next section bg-base-300 */
+        }
+
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(85px, 0, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-base-content relative">
+
+    <!-- Flying Bats Background -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-30">
+        <i class="fas fa-crow absolute text-4xl bat-1"></i>
+        <i class="fas fa-crow absolute text-2xl bat-2"></i>
+        <i class="fas fa-crow absolute text-5xl bat-3"></i>
+    </div>
+
+    <div id="app" class="relative z-10 ">
+        <!-- Navbar -->
+        <div
+            class="navbar bg-base-100/90 backdrop-blur-md fixed top-0 z-50 shadow-orange-900/50 shadow-lg px-4 md:px-10 border-b border-primary/20">
+            <div class="flex-1">
+                <a
+                    class="btn btn-ghost text-2xl md:text-3xl text-primary font-bold brand-font tracking-widest animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-spider text-secondary"></i> Portfolio
+                </a>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="flex-none hidden md:block">
+                <ul class="menu menu-horizontal px-1 font-medium text-lg">
+                    <li><a href="#about" @click.prevent="scrollTo('#about')"
+                            class="hover:text-primary transition-colors duration-300"><i class="fas fa-user"></i>
+                            About</a></li>
+                    <li><a href="#skills" @click.prevent="scrollTo('#skills')"
+                            class="hover:text-primary transition-colors duration-300"><i class="fas fa-magic"></i> Tech
+                            Stack</a></li>
+                    <li><a href="#projects" @click.prevent="scrollTo('#projects')"
+                            class="hover:text-primary transition-colors duration-300"><i class="fas fa-flask"></i>
+                            Projects</a></li>
+                    <li><a href="#certificates" @click.prevent="scrollTo('#certificates')"
+                            class="hover:text-primary transition-colors duration-300"><i class="fas fa-scroll"></i>
+                            Awards</a></li>
+                    <li><a href="#education" @click.prevent="scrollTo('#education')"
+                            class="hover:text-primary transition-colors duration-300"><i
+                                class="fas fa-graduation-cap"></i> Education</a></li>
+                </ul>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="flex-none md:hidden">
+                <button class="btn btn-square btn-ghost text-primary" @click="mobileMenuOpen = !mobileMenuOpen">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <transition enter-active-class="animate__animated animate__fadeInDown animate__faster"
+            leave-active-class="animate__animated animate__fadeOutUp animate__faster">
+            <div v-show="mobileMenuOpen"
+                class="fixed top-[64px] left-0 w-full bg-base-100 z-40 border-b border-primary/20 shadow-xl md:hidden">
+                <ul class="menu p-4 text-lg">
+                    <li><a href="#about" @click.prevent="scrollTo('#about'); mobileMenuOpen = false"><i
+                                class="fas fa-user"></i> About</a></li>
+                    <li><a href="#skills" @click.prevent="scrollTo('#skills'); mobileMenuOpen = false"><i
+                                class="fas fa-magic"></i> Tech Stack</a></li>
+                    <li><a href="#projects" @click.prevent="scrollTo('#projects'); mobileMenuOpen = false"><i
+                                class="fas fa-flask"></i> Projects</a></li>
+                    <li><a href="#certificates" @click.prevent="scrollTo('#certificates'); mobileMenuOpen = false"><i
+                                class="fas fa-scroll"></i> Awards</a></li>
+                    <li><a href="#education" @click.prevent="scrollTo('#education'); mobileMenuOpen = false"><i
+                                class="fas fa-graduation-cap"></i> Education</a></li>
+                </ul>
+            </div>
+        </transition>
+
+        <!-- Hero Section -->
+        <section id="about" class="hero min-h-screen pt-16 relative overflow-hidden flex flex-col justify-center">
+            <!-- Decorative Elements -->
+            <div
+                class="absolute top-10 right-2 md:top-20 md:right-10 text-6xl md:text-9xl text-primary opacity-20 animate-float pointer-events-none">
+                <i class="fas fa-ghost"></i>
+            </div>
+            <div class="absolute bottom-20 -left-4 md:left-10 text-6xl md:text-8xl text-secondary opacity-20 animate-float pointer-events-none"
+                style="animation-delay: -2s;">
+                <i class="fas fa-cloud-moon"></i>
+            </div>
+
+            <div class="hero-content flex-col lg:flex-row-reverse gap-12 md:gap-20 z-10 mb-20">
+                <div class="relative group" data-aos="zoom-in" data-aos-duration="1500">
+                    <div
+                        class="absolute -inset-2 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500 animate-pulse">
+                    </div>
+                    <img :src="profile.image"
+                        class="relative max-w-sm rounded-full shadow-xl w-64 h-64 object-cover border-4 border-primary grayscale-[50%] hover:grayscale-0 transition-all duration-500" />
+                </div>
+                <div class="text-center lg:text-left w-full">
+                    <div class="badge badge-primary badge-lg mb-4 animate__animated animate__fadeInDown"><i
+                            class="fas fa-bolt mr-2"></i> Available for Work</div>
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 text-primary animate__animated animate__fadeInLeft">
+                        WEB DEVELOPMENT <br>
+                        <span class="text-2xl md:text-4xl text-base-content font-sans">Hi, I'm Cocoa</span>
+                    </h1>
+                    <h2 class="text-2xl font-semibold text-secondary animate__animated animate__fadeInRight">
+                        my fullname is Phatcharaphon Chairangsi</h2>
+                    <p
+                        class="py-6 text-xl opacity-90 max-w-lg font-light leading-relaxed animate__animated animate__fadeInUp">
+                        {{ profile.bio }}
+                    </p>
+                    <div
+                        class="flex flex-wrap gap-4 justify-center lg:justify-start animate__animated animate__fadeInUp">
+                        <a href="#projects" @click.prevent="scrollTo('#projects')"
+                            class="btn btn-primary btn-lg shadow-lg border-none text-white transition-transform duration-300 hover:scale-105 active:scale-95">
+                            <i class="fas fa-eye"></i> View Projects
+                        </a>
+                        <a :href="profile.github" target="_blank"
+                            class="btn btn-secondary btn-outline btn-circle btn-lg transition-transform duration-300 hover:scale-105 active:scale-95"><i
+                                class="fab fa-github text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANIMATED WAVES -->
+            <div class="absolute bottom-0 w-full z-20">
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave"
+                            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" class="text-base-300 fill-current" />
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+
+
+        <!-- Tech Stack Section -->
+        <section id="skills" class="py-20 px-4 md:px-10 bg-base-300 relative z-20">
+            <div class="container mx-auto relative z-10">
+                <div class="text-center mb-16" data-aos="fade-down">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-2 text-primary drop-shadow-md">Tech Stack</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div v-for="(category, index) in skills" :key="index"
+                        class="card bg-base-100 shadow-xl border border-primary/20 hover:border-primary transition-all duration-300 card-hover"
+                        :data-aos="index % 2 === 0 ? 'fade-right' : 'fade-left'" :data-aos-delay="index * 100">
+                        <div class="card-body relative overflow-hidden">
+                            <div class="absolute -right-4 -top-4 text-6xl opacity-5 rotate-12">
+                                <i :class="category.icon"></i>
+                            </div>
+
+                            <h3 class="card-title text-2xl text-secondary brand-font tracking-wider mb-4">
+                                <i :class="category.icon" class="mr-2"></i> {{ category.name }}
+                            </h3>
+
+                            <div class="divider before:bg-primary after:bg-primary my-1 opacity-50"></div>
+
+                            <div class="flex flex-wrap gap-4 mt-2 justify-center">
+                                <div v-for="tech in category.items" :key="tech.name"
+                                    class="flex flex-col items-center gap-2 group/icon cursor-pointer">
+                                    <div
+                                        class="w-14 h-14 flex items-center justify-center bg-base-200 rounded-xl shadow-md border border-base-content/10 p-2 transition-all duration-300 group-hover/icon:scale-110 group-hover/icon:bg-base-100 group-hover/icon:border-primary group-hover/icon:shadow-primary/50">
+                                        <i v-if="tech.type === 'icon'" :class="[tech.value, 'text-4xl']"></i>
+                                        <img v-else :src="tech.value" :alt="tech.name"
+                                            class="w-full h-full object-contain">
+                                    </div>
+                                    <span
+                                        class="text-xs font-bold opacity-60 group-hover/icon:opacity-100 group-hover/icon:text-primary transition-colors text-center w-full truncate">{{
+                                        tech.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 px-4 md:px-10 bg-base-200">
+            <div class="container mx-auto">
+                <div class="text-center mb-16" data-aos="flip-up">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-2 text-secondary">My Projects</h2>
+                    <p class="mt-4 text-xl opacity-70 font-light">โปรเจกต์ที่ผมทำ</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div v-for="(project, index) in projects" :key="index"
+                        class="card bg-base-100 shadow-xl group overflow-hidden border border-transparent hover:border-secondary transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                        data-aos="zoom-in-up" :data-aos-delay="index * 150">
+                        <figure class="relative h-48 md:h-60 overflow-hidden">
+                            <img :src="project.image" alt="Project Image"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:grayscale-0" />
+                            <div
+                                class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4">
+                                <h3 class="text-2xl font-bold text-primary brand-font">BOO!</h3>
+                                <div class="flex gap-4">
+                                    <a :href="project.github" target="_blank"
+                                        class="btn btn-circle btn-primary btn-outline hover:bg-primary hover:text-black"><i
+                                            class="fab fa-github text-xl"></i></a>
+                                    <a :href="project.demo" target="_blank"
+                                        class="btn btn-circle btn-secondary btn-outline hover:bg-secondary hover:text-black"><i
+                                            class="fas fa-external-link-alt text-xl"></i></a>
+                                </div>
+                            </div>
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title text-2xl brand-font tracking-wide">
+                                {{ project.title }}
+                                <div v-if="project.isNew" class="badge badge-primary badge-sm animate-pulse">FRESH BLOOD
+                                </div>
+                            </h2>
+                            <p class="text-sm opacity-70 mb-4">{{ project.description }}</p>
+                            <div class="flex flex-wrap gap-1 mb-4">
+                                <span v-for="tag in project.tech" :key="tag"
+                                    class="badge badge-neutral text-xs border-secondary/30">{{ tag }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section id="certificates" class="py-20 px-4 md:px-10 bg-base-300 relative overflow-hidden">
+            <div class="absolute top-0 right-0 text-9xl text-base-content opacity-10 pointer-events-none">
+                <i class="fas fa-spider"></i>
+            </div>
+
+            <div class="container mx-auto relative z-10">
+                <div class="text-center mb-16" data-aos="fade-down">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-2 text-primary">Awards</h2>
+                    <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
+                    <p class="mt-4 text-sm opacity-50">( คลิกที่ใบประกาศเพื่อดูรายละเอียด )</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Added @click to open modal -->
+                    <div v-for="(cert, index) in certificates" :key="index" @click="showCert(cert)"
+                        class="card bg-base-100 shadow-xl border border-primary/20 hover:border-primary hover:shadow-[0_0_20px_rgba(242,140,24,0.4)] transition-all duration-300 group cursor-pointer active:scale-95"
+                        data-aos="fade-up" :data-aos-delay="index * 200">
+                        <figure class="h-64 overflow-hidden relative bg-base-200">
+                            <div v-if="!cert.image" class="w-full h-full flex items-center justify-center">
+                                <i
+                                    class="fas fa-certificate text-8xl text-primary/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <img v-else :src="cert.image"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+
+                            <div
+                                class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span
+                                    class="text-primary font-bold text-xl brand-font tracking-wider border-2 border-primary px-4 py-2 rounded">
+                                    <i class="fas fa-search-plus mr-2"></i> ZOOM
+                                </span>
+                            </div>
+                        </figure>
+
+                        <div class="card-body relative">
+                            <div class="absolute -top-4 right-4">
+                                <div class="badge badge-secondary shadow-lg py-3 px-4 font-bold">{{ cert.rank }}
+                                </div>
+                            </div>
+
+                            <h2 class="card-title text-2xl text-primary mt-2 line-clamp-1"
+                                style="font-family: 'Kanit', sans-serif;">
+                                {{ cert.title }}
+                            </h2>
+                            <div class="flex gap-2">
+                                <p class="text-sm font-bold opacity-80 text-secondary-content mb-2 flex items-center">
+                                    <i class="fas fa-trophy mr-2"></i> {{ cert.level }}
+                                </p>
+                                <p class="text-sm font-bold opacity-80 text-secondary-content mb-2 flex items-center">
+                                    <i class="fas fa-calendar mr-2"></i> {{ cert.level2 }}
+                                </p>
+                            </div>
+                            <p class="text-sm opacity-70 leading-relaxed line-clamp-3">{{ cert.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 px-4 md:px-10 bg-base-200 relative z-20">
+            <div class="container mx-auto max-w-5xl">
+                <div class="text-center mb-16" data-aos="fade-down">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-2 text-primary">Education Timeline</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+                </div>
+
+                <!-- Mobile View: Cards (Vertical Stack) -->
+                <div class="space-y-6 md:hidden">
+                    <div v-for="(edu, index) in education" :key="index"
+                        class="card bg-base-100 shadow-lg border-l-4 border-primary p-6 relative overflow-hidden group"
+                        data-aos="fade-up" :data-aos-delay="index * 100">
+                        <div
+                            class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <h3 class="font-bold text-xl text-primary mb-1">{{ edu.school }}</h3>
+                            <div class="badge badge-secondary badge-outline mb-3 font-mono">{{ edu.year }}</div>
+                            <div class="text-base font-semibold mb-2 leading-relaxed">
+                                ประเภทวิชาอุตสาหกรรมดิจิทัลและเทคโนโลยีสารสนเทศ <br>
+                                <span class="text-secondary">{{ edu.degree }}</span>
+                            </div>
+                            <p class="text-sm opacity-70">{{ edu.description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop View: Timeline -->
+                <ul class="timeline timeline-vertical hidden md:flex">
+                    <li v-for="(edu, index) in education" :key="index">
+                        <hr v-if="index !== 0" class="bg-primary" />
+                        <div class="timeline-middle">
+                            <i
+                                class="fas fa-graduation-cap text-primary text-xl bg-base-100 p-1 rounded-full border border-primary transition-all duration-300 hover:scale-125 hover:rotate-12 hover:shadow-[0_0_10px_#f28c18] cursor-pointer"></i>
+                        </div>
+                        <div :class="index % 2 === 0 ? 'timeline-start md:text-end' : 'timeline-end'"
+                            class="mb-10 p-6 border border-primary/30 rounded-xl shadow-lg bg-base-100 hover:shadow-[0_0_20px_rgba(242,140,24,0.3)] transition-all duration-300 hover:scale-105"
+                            data-aos="zoom-in">
+                            <time class="font-mono italic text-secondary block mb-1">{{ edu.year }}</time>
+                            <div class="text-lg font-black text-primary">{{ edu.school }}</div>
+                            <div class="text-base font-bold mb-2">ประเภทวิชาอุตสาหกรรมดิจิทัลและเทคโนโลยีสารสนเทศ <br>
+                                {{ edu.degree }}</div>
+                            <p class="opacity-70 text-sm">
+                                {{ edu.description }}
+                            </p>
+                        </div>
+                        <hr v-if="index !== education.length - 1" class="bg-primary" />
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer footer-center p-10 bg-neutral text-neutral-content relative overflow-hidden "
+            style="row-gap: 1rem;">
+            <div class="absolute bottom-0 left-0 w-full opacity-10 text-9xl flex justify-between pointer-events-none">
+                <span>🌲</span><span>🪦</span><span>🌲</span>
+            </div>
+
+            <aside class="z-10">
+                <div class="avatar placeholder mb-4 animate-bounce">
+                    <div class="bg-primary text-primary-content rounded-full w-16 shadow-[0_0_20px_#f28c18]">
+                        <span class="text-3xl font-bold"><i class="fas fa-ghost"></i></span>
+                    </div>
+                </div>
+                <p class="font-bold text-2xl brand-font text-primary">
+                    Thank you for <br />viewing the work.
+                </p>
+                <p>Email:phatcharaphoncocoa@gmail.com | Tel: (+66)98-602-0470 🕷️</p>
+            </aside>
+            <nav class="z-10">
+                <div class="grid grid-flow-col gap-6 text-3xl">
+                    <a :href="profile.github" target="_blank"
+                        class="hover:text-primary hover:scale-125 transition-transform"><i
+                            class="fab fa-github"></i></a>
+                </div>
+            </nav>
+        </footer>
+
+        <!-- CERTIFICATE MODAL -->
+        <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle backdrop-blur-sm">
+            <div
+                class="modal-box bg-base-100 border-0 md:border-1 md:border-primary relative max-w-3xl w-full p-0 overflow-y-auto shadow-[0_0_30px_rgba(242,140,24,0.3)]">
+                <form method="dialog">
+                    <button
+                        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-10 bg-base-300 text-white hover:bg-primary hover:text-black">✕</button>
+                </form>
+                <figure class="w-full h-auto max-h-[70vh] relative bg-black/90 flex items-center justify-center p-4">
+                    <!-- Check if selectedCert is not null before rendering image -->
+                    <img v-if="selectedCert" :src="selectedCert.image"
+                        class="w-auto h-auto max-w-full max-h-[65vh] object-contain shadow-2xl" />
+                </figure>
+                <div class="p-6 bg-base-200">
+                    <h3 class="font-bold text-3xl text-primary mb-2" style="font-family: 'Kanit', sans-serif;">{{
+                        selectedCert?.title }}</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge badge-secondary badge-lg">{{ selectedCert?.level }}</span>
+                        <span class="badge badge-accent badge-outline badge-lg">{{ selectedCert?.level2 }}</span>
+                        <span class="badge badge-primary badge-outline badge-lg">{{ selectedCert?.rank }}</span>
+                    </div>
+                    <p class="py-2 text-lg opacity-80 leading-relaxed border-t border-white/10 pt-4">{{
+                        selectedCert?.description }}</p>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+    </div>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+
+        createApp({
+            setup() {
+                // Initialize AOS
+                onMounted(() => {
+                    AOS.init({
+                        once: false,
+                        mirror: true
+                    });
+                });
+
+                const profile = ref({
+                    name: 'YOUR NAME',
+                    role: 'Full Stack Developer',
+                    bio: 'ผมอยากเป็น Full Stack Developer ที่มีความชื่นชอบในการพัฒนา Web Applications และ Mobile Applications',
+                    image: './images/Profile.jpg',
+                    github: 'https://github.com/CoCoa-luck-hat'
+                });
+
+                const skills = ref([
+                    {
+                        name: 'Frontend Development',
+                        icon: 'fas fa-flask',
+                        items: [
+                            { name: 'Vue.js', type: 'icon', value: 'devicon-vuejs-plain colored' },
+                            { name: 'Pinia', type: 'img', value: 'https://pinia.vuejs.org/logo.svg' },
+                            { name: 'Vue Router', type: 'icon', value: 'devicon-vuejs-plain' },
+                            { name: 'Vuetify', type: 'icon', value: 'devicon-vuetify-plain colored' },
+                            { name: 'Tailwind CSS', type: 'icon', value: 'devicon-tailwindcss-original colored' },
+                            { name: 'Bootstrap', type: 'icon', value: 'devicon-bootstrap-plain colored' },
+                            { name: 'JavaScript', type: 'icon', value: 'devicon-javascript-plain colored' },
+                            { name: 'HTML5', type: 'icon', value: 'devicon-html5-plain colored' },
+                            { name: 'CSS3', type: 'icon', value: 'devicon-css3-plain colored' }
+                        ]
+                    },
+                    {
+                        name: 'Backend Development',
+                        icon: 'fas fa-dungeon',
+                        items: [
+                            { name: 'Node.js', type: 'icon', value: 'devicon-nodejs-plain colored' },
+                            { name: 'Express', type: 'icon', value: 'devicon-express-original text-white' },
+                            { name: 'PHP', type: 'icon', value: 'devicon-php-plain colored' }
+                        ]
+                    },
+                    {
+                        name: 'Database',
+                        icon: 'fas fa-database',
+                        items: [
+                            { name: 'MySQL', type: 'icon', value: 'devicon-mysql-plain colored' },
+                            { name: 'PostgreSQL', type: 'icon', value: 'devicon-postgresql-plain colored' }
+                        ]
+                    },
+                    {
+                        name: 'Tools',
+                        icon: 'fas fa-tools',
+                        items: [
+                            { name: 'Docker', type: 'icon', value: 'devicon-docker-plain colored' },
+                            { name: 'Git', type: 'icon', value: 'devicon-git-plain colored' },
+                            { name: 'XAMPP', type: 'img', value: 'https://cdn.worldvectorlogo.com/logos/xampp.svg' },
+                            { name: 'Postman', type: 'icon', value: 'devicon-postman-plain colored' },
+                            { name: 'DBeaver', type: 'img', value: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/DBeaver_logo.svg' }
+                        ]
+                    },
+                    {
+                        name: 'Operating Systems',
+                        icon: 'fab fa-linux',
+                        items: [
+                            { name: 'Ubuntu', type: 'icon', value: 'devicon-ubuntu-plain colored' },
+                            { name: 'CentOS', type: 'icon', value: 'devicon-centos-plain colored' }
+                        ]
+                    }
+                ]);
+
+                const projects = ref([
+                    {
+                        title: 'CVC Corruption Knowledge Hub',
+                        description: 'เป็นโปรเจคโครงการห้องในสาขาเทคโนโลยีสารสนเทศ วิทยาลัยอาชีวศึกษาเชียงราย',
+                        image: './images/Projects/Corruption.png',
+                        tech: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+                        github: 'https://github.com/CoCoa-luck-hat/web_information_2568-1',
+                        demo: 'https://cvc-corruption-knowleg.netlify.app/',
+                        isNew: false
+                    },
+                    {
+                        title: 'Creative Photo Portfolio',
+                        description: 'เว็บไซต์แกลเลอรีแสดงผลงานภาพถ่าย ออกแบบ Layout ด้วยตนเอง',
+                        image: './images/Projects/Photo.png',
+                        tech: ['HTML', 'CSS', 'JavaScript'],
+                        github: 'https://github.com/CoCoa-luck-hat/web_photo_cocoa',
+                        demo: 'https://cocoa-luck-ii.netlify.app/',
+                        isNew: false
+                    },
+                    {
+                        title: 'Smart Widget',
+                        description: 'เว็บไซต์รวมเครื่องมือ (นาฬิกา, เครื่องคิดเลข, เครื่องเล่นเพลง) พร้อมระบบ Dark/Light Mode',
+                        image: './images/Projects/Widget.png',
+                        tech: ['HTML', 'CSS', 'JavaScript'],
+                        github: 'https://github.com/CoCoa-luck-hat/Project',
+                        demo: 'https://projectcocoa.netlify.app/',
+                        isNew: false
+                    }
+                ]);
+
+                const education = ref([
+                    {
+                        year: '2568 – ปัจจุบัน',
+                        degree: 'สาขาเทคโนโลยีสารสนเทศ ',
+                        school: 'วิทยาลัยอาชีวศึกษาเชียงราย (ประกาศนียบัตรวิชาชีพชั้นสูง)',
+                        description: 'GPA: 3.86'
+                    },
+                    {
+                        year: '2566 – 2568',
+                        degree: 'สาขาเทคโนโลยีสารสนเทศ ',
+                        school: 'วิทยาลัยอาชีวศึกษาเชียงราย (ประกาศนียบัตรวิชาชีพ)',
+                        description: 'GPA: 3.63'
+                    }
+                ]);
+
+                const certificates = ref([
+                    {
+                        title: 'การแข่งขันทักษะเทคโนโลยีสารสนเทศด้านโปรแกรมและเครือข่าย DevOps',
+                        level: 'ระดับ ปวส.',
+                        level2: 'ระดับภาค',
+                        rank: 'รองชนะเลิศอันดับ 1',
+                        description: 'แข่งขันในบทบาท Web Developer (Full Stack) พัฒนา "ระบบแจ้งซ่อมอุปกรณ์ไอที" ภายในเวลาที่กำหนด โดยออกแบบระบบครอบคลุมทั้งหน้าบ้านและหลังบ้าน มีระบบ Authentication ยืนยันตัวตนด้วย JWT จัดการ State ด้วย Pinia และเชื่อมต่อ API ด้วย Axios พร้อมทั้งวางผังการทำงาน (Flowchart, ER Diagram) และ Deploy งานด้วยกระบวนการ DevOps',
+                        image: './images/Awards/DevOpsLevel2.png'
+                    },
+                    {
+                        title: 'การแข่งขันทักษะเทคโนโลยีสารสนเทศด้านโปรแกรมและเครือข่าย DevOps',
+                        level: 'ระดับ ปวส.',
+                        level2: 'ระดับจังหวัด',
+                        rank: 'ชนะเลิศ',
+                        description: 'แข่งขันในบทบาท Web Developer (Full Stack) พัฒนา " Smart Farming Dashboard" ภายในเวลาที่กำหนด เพื่อแสดงผลค่าอุณหภูมิและความชื้นในดินจากอุปกรณ์ IoT แบบ Real-time ออกแบบระบบจัดการสิทธิ์ผู้ใช้งาน (Admin/User) โดยแยกหน้า Dashboard สำหรับผู้ดูแลระบบเพื่อดูภาพรวม และหน้า User สำหรับดูค่าสถานะหน้างานจริง โดยออกแบบระบบครอบคลุมทั้งหน้าบ้านและหลังบ้าน มีระบบ Authentication ยืนยันตัวตนด้วย JWT จัดการ State ด้วย Pinia และเชื่อมต่อ API ด้วย Axios พร้อมทั้งวางผังการทำงาน (Flowchart, ER Diagram) และ Deploy งานด้วยกระบวนการ DevOps ',
+                        image: './images/Awards/DevOpsLevel1.png'
+                    },
+                    {
+                        title: 'การแข่งขันทักษะการเขียนโปรแกรมคอมพิวเตอร์',
+                        level: 'ระดับ ปวช.',
+                        level2: 'ระดับชาติ',
+                        rank: 'รางวัลชมเชย',
+                        description: 'แข่งขันในบทบาท Frontend Developer และ Backend Developer พัฒนา "ระบบสั่งซื้ออาหารออนไลน์" ที่รองรับการทำงาน 3 รูปแบบ (Admin, Rider, User) ออกแบบ UX/UI ให้ใช้งานง่ายสำหรับผู้สั่งอาหารและไรเดอร์ เชื่อมต่อข้อมูล และจัดการการแสดงผลข้อมูลสินค้าและออเดอร์ให้ถูกต้องตามเกณฑ์',
+                        image: './images/Awards/PHPLevel3.png'
+                    },
+                    {
+                        title: 'การแข่งขันทักษะการเขียนโปรแกรมคอมพิวเตอร์',
+                        level: 'ระดับ ปวช.',
+                        level2: 'ระดับภาค',
+                        rank: 'ชนะเลิศ',
+                        description: 'แข่งขันในบทบาท Frontend Developer และ Backend Developer พัฒนา "ระบบสั่งซื้ออาหารออนไลน์" ที่รองรับการทำงาน 3 รูปแบบ (Admin, Rider, User) ออกแบบ UX/UI ให้ใช้งานง่ายสำหรับผู้สั่งอาหารและไรเดอร์ เชื่อมต่อข้อมูล และจัดการการแสดงผลข้อมูลสินค้าและออเดอร์ให้ถูกต้องตามเกณฑ์',
+                        image: './images/Awards/PHPLevel2.png'
+                    },
+                ]);
+
+                const mobileMenuOpen = ref(false);
+
+                // Modal Logic
+                const selectedCert = ref(null);
+
+                const showCert = (cert) => {
+                    selectedCert.value = cert;
+                    document.getElementById('cert_modal').showModal();
+                };
+
+                // Updated Smooth Scroll Function
+                const scrollTo = (selector) => {
+                    const target = document.querySelector(selector);
+                    if (!target) return;
+
+                    const headerOffset = 80; // เผื่อความสูง Navbar
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                    const startPosition = window.scrollY;
+                    const distance = offsetPosition - startPosition;
+                    const duration = 1000; // ระยะเวลา (ms) ยิ่งมากยิ่งช้าและนุ่มนวล
+                    let start = null;
+
+                    // Easing function (Ease In Out Cubic) เพื่อความสมูท
+                    const easeInOutCubic = (t, b, c, d) => {
+                        t /= d / 2;
+                        if (t < 1) return c / 2 * t * t * t + b;
+                        t -= 2;
+                        return c / 2 * (t * t * t + 2) + b;
+                    };
+
+                    const step = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = timestamp - start;
+                        const scrollY = easeInOutCubic(progress, startPosition, distance, duration);
+                        window.scrollTo(0, scrollY);
+                        if (progress < duration) window.requestAnimationFrame(step);
+                        else window.scrollTo(0, offsetPosition); // จบที่ตำแหน่งที่ถูกต้องแม่นยำ
+                    };
+
+                    window.requestAnimationFrame(step);
+                };
+
+                return {
+                    profile,
+                    skills,
+                    projects,
+                    education,
+                    certificates,
+                    selectedCert,
+                    showCert,
+                    scrollTo,
+                    mobileMenuOpen
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

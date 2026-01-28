@@ -7,7 +7,7 @@
     <title>Portfolio | Phatcharaphon Chairangsi</title>
 
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>C</text></svg>">
 
     <!-- Fonts: Kanit & Creepster (Halloween Font) -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Creepster&display=swap"
@@ -222,6 +222,9 @@
                     <li><a href="#skills" @click.prevent="scrollTo('#skills')"
                             class="hover:text-primary transition-colors duration-300"><i class="fas fa-magic"></i> Tech
                             Stack</a></li>
+                    <li><a href="#experience" @click.prevent="scrollTo('#experience')"
+                            class="hover:text-primary transition-colors duration-300"><i class="fas fa-briefcase"></i>
+                            Experience</a></li>
                     <li><a href="#projects" @click.prevent="scrollTo('#projects')"
                             class="hover:text-primary transition-colors duration-300"><i class="fas fa-flask"></i>
                             Projects</a></li>
@@ -251,6 +254,8 @@
                                 class="fas fa-user"></i> About</a></li>
                     <li><a href="#skills" @click.prevent="scrollTo('#skills'); mobileMenuOpen = false"><i
                                 class="fas fa-magic"></i> Tech Stack</a></li>
+                    <li><a href="#experience" @click.prevent="scrollTo('#experience'); mobileMenuOpen = false"><i
+                                class="fas fa-briefcase"></i> Experience</a></li>
                     <li><a href="#projects" @click.prevent="scrollTo('#projects'); mobileMenuOpen = false"><i
                                 class="fas fa-flask"></i> Projects</a></li>
                     <li><a href="#certificates" @click.prevent="scrollTo('#certificates'); mobileMenuOpen = false"><i
@@ -372,6 +377,65 @@
             </div>
         </section>
 
+        <!-- Work Experience Section -->
+        <section id="experience" class="py-20 px-4 md:px-10 bg-base-300 relative z-20">
+            <div class="container mx-auto">
+                <div class="text-center mb-16" data-aos="fade-down">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-2 text-primary">Work Experience</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div v-for="(exp, index) in experiences" :key="index"
+                        class="card bg-base-100 shadow-xl border border-primary/20 hover:border-primary transition-all duration-300 group hover:scale-105 hover:shadow-2xl"
+                        data-aos="fade-up" :data-aos-delay="index * 100">
+
+                        <!-- Image Area -->
+                        <figure class="h-48 md:h-60 overflow-hidden relative bg-base-200">
+                            <img v-if="exp.image" :src="exp.image"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                alt="Work Experience Image" />
+                            <!-- Fallback Icon if no image -->
+                            <div v-else
+                                class="w-full h-full flex items-center justify-center bg-base-200 text-primary/20">
+                                <i class="fas fa-briefcase text-6xl"></i>
+                            </div>
+                        </figure>
+
+                        <div class="card-body">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="badge badge-secondary-content badge-outline ">{{ exp.year }}</div>
+                                <div class="badge badge-ghost gap-2"><i class="fas fa-building text-xs"></i> {{
+                                    exp.company }}</div>
+                            </div>
+
+                            <h3 class="card-title text-xl text-primary font-bold mb-2">{{ exp.position }}</h3>
+                            <div @click="exp.expanded = !exp.expanded" class="cursor-pointer group/desc relative">
+                                <p class="text-sm opacity-70 mb-4 transition-all duration-300"
+                                    :class="{ 'line-clamp-3': !exp.expanded }">
+                                    {{ exp.description }}
+                                </p>
+                                <div v-if="!exp.expanded"
+                                    class="text-center w-full -mt-6 bg-gradient-to-t from-base-100 via-base-100/80 to-transparent pt-6 pb-0 absolute bottom-0 flex justify-center items-end">
+                                    <span
+                                        class="text-xs text-primary font-bold drop-shadow-md bg-base-100/50 px-2 rounded-full"><i
+                                            class="fas fa-chevron-down animate-bounce mr-1"></i> อ่านเพิ่มเติม</span>
+                                </div>
+                            </div>
+
+                            <div class="card-actions justify-end mt-auto">
+                                <a :href="exp.link" target="_blank"
+                                    class="btn btn-primary btn-sm btn-outline hover:text-white group-hover:bg-primary ">
+                                    เข้าชม<i
+                                        class="fas fa-arrow-right ml-1 group-hover:translate-x-1 transition-transform"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Projects Section -->
         <section id="projects" class="py-20 px-4 md:px-10 bg-base-200">
             <div class="container mx-auto">
@@ -447,8 +511,8 @@
                             <div
                                 class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <span
-                                    class="text-primary font-bold text-xl brand-font tracking-wider border-2 border-primary px-4 py-2 rounded">
-                                    <i class="fas fa-search-plus mr-2"></i> ZOOM
+                                    class="text-primary font-bold text-xl brand-font tracking-wider border-2 border-primary px-4 py-2 rounded-full hover:bg-primary hover:text-black transition-all duration-300 ">
+                                    <i class="fas fa-search-plus "></i>
                                 </span>
                             </div>
                         </figure>
@@ -576,9 +640,9 @@
                     <h3 class="font-bold text-3xl text-primary mb-2" style="font-family: 'Kanit', sans-serif;">{{
                         selectedCert?.title }}</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-secondary badge-lg">{{ selectedCert?.level }}</span>
+                        <span class="badge badge-info badge-outline badge-lg">{{ selectedCert?.level }}</span>
                         <span class="badge badge-accent badge-outline badge-lg">{{ selectedCert?.level2 }}</span>
-                        <span class="badge badge-primary badge-outline badge-lg">{{ selectedCert?.rank }}</span>
+                        <span class="badge  badge-secondary badge-lg">{{ selectedCert?.rank }}</span>
                     </div>
                     <p class="py-2 text-lg opacity-80 leading-relaxed border-t border-white/10 pt-4">{{
                         selectedCert?.description }}</p>
@@ -610,7 +674,7 @@
                 const profile = ref({
                     name: 'YOUR NAME',
                     role: 'Full Stack Developer',
-                    bio: 'ผมอยากเป็น Full Stack Developer ที่มีความชื่นชอบในการพัฒนา Web Applications และ Mobile Applications',
+                    bio: 'ผมอยากเป็น Full Stack Developer ที่มีความชื่นชอบในการพัฒนา Web Applications และ Mobile Applications พร้อมเรียนรู้และพัฒนาทักษะใหม่ๆ',
                     image: './images/Profile.jpg',
                     github: 'https://github.com/CoCoa-luck-hat'
                 });
@@ -666,6 +730,18 @@
                             { name: 'Ubuntu', type: 'icon', value: 'devicon-ubuntu-plain colored' },
                             { name: 'CentOS', type: 'icon', value: 'devicon-centos-plain colored' }
                         ]
+                    }
+                ]);
+
+                const experiences = ref([
+                    {
+                        company: 'วิทยาลัยอาชีวศึกษาเชียงราย',
+                        position: 'นักศึกษาฝึกงานงานศูนย์ข้อมูลและ งานสารสนเทศ',
+                        year: 'ต.ค.2567 - ก.พ.2568',
+                        description: 'Web Development : พัฒนาและดูแลเว็บไซต์สาขาวิชาเทคโนโลยีสารสนเทศให้กับ วิทยาลัยอาชีวศึกษาเชียงราย โดยการพัฒนาใช้ HTML, CSS, PHP, JavaScript และ Bootstrap เพื่อเป็นการพัฒนาเว็บไซต์สำหรับการประชาสัมพันธ์ข้อมูลแก่ นักศึกษาและ บุคลากร รวมถึงบุคคลทั่วไป',
+                        link: 'https://cvc.ac.th/web_branch/it_2025/',
+                        image: './images/Work/cvc.png', // Example path, replaces with actual or placeholder
+                        expanded: false
                     }
                 ]);
 
@@ -747,6 +823,14 @@
                         description: 'แข่งขันในบทบาท Frontend Developer และ Backend Developer พัฒนา "ระบบสั่งซื้ออาหารออนไลน์" ที่รองรับการทำงาน 3 รูปแบบ (Admin, Rider, User) ออกแบบ UX/UI ให้ใช้งานง่ายสำหรับผู้สั่งอาหารและไรเดอร์ เชื่อมต่อข้อมูล และจัดการการแสดงผลข้อมูลสินค้าและออเดอร์ให้ถูกต้องตามเกณฑ์',
                         image: './images/Awards/PHPLevel2.png'
                     },
+                    {
+                        title: 'การแข่งขันทักษะการเขียนโปรแกรมคอมพิวเตอร์',
+                        level: 'ระดับ ปวช.',
+                        level2: 'ระดับจังหวัด',
+                        rank: 'ชนะเลิศ',
+                        description: 'แข่งขันในบทบาท Frontend Developer และ Backend Developer พัฒนา "ระบบสั่งซื้ออาหารออนไลน์" ที่รองรับการทำงาน 3 รูปแบบ (Admin, Rider, User) ออกแบบ UX/UI ให้ใช้งานง่ายสำหรับผู้สั่งอาหารและไรเดอร์ เชื่อมต่อข้อมูล และจัดการการแสดงผลข้อมูลสินค้าและออเดอร์ให้ถูกต้องตามเกณฑ์',
+                        image: './images/Awards/PHPLevel1.png'
+                    },
                 ]);
 
                 const mobileMenuOpen = ref(false);
@@ -795,6 +879,7 @@
                 return {
                     profile,
                     skills,
+                    experiences,
                     projects,
                     education,
                     certificates,

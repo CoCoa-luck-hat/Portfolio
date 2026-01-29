@@ -403,13 +403,13 @@
                         </figure>
 
                         <div class="card-body">
-                            <div class="flex justify-between items-start mb-2">
+                            <div class="flex justify-between items-start md:mb-2 md:flex-row flex-col gap-2">
                                 <div class="badge badge-secondary-content badge-outline ">{{ exp.year }}</div>
                                 <div class="badge badge-ghost gap-2"><i class="fas fa-building text-xs"></i> {{
                                     exp.company }}</div>
                             </div>
 
-                            <h3 class="card-title text-xl text-primary font-bold mb-2">{{ exp.position }}</h3>
+                            <h3 class="card-title text-xl text-primary font-bold md:mb-2">{{ exp.position }}</h3>
                             <div @click="exp.expanded = !exp.expanded" class="cursor-pointer group/desc relative">
                                 <p class="text-sm opacity-70 mb-4 transition-all duration-300"
                                     :class="{ 'line-clamp-3': !exp.expanded }">

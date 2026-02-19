@@ -528,10 +528,12 @@
                                 {{ cert.title }}
                             </h2>
                             <div class="flex gap-2">
-                                <p class="text-sm font-bold opacity-80 text-secondary-content mb-2 flex items-center">
+                                <p class="text-sm font-bold opacity-80 text-secondary-content mb-2 flex items-center" style="color: chartreuse;">
                                     <i class="fas fa-trophy mr-2"></i> {{ cert.level }}
                                 </p>
-                                <p class="text-sm font-bold opacity-80 text-secondary-content mb-2 flex items-center">
+                                <p class="text-sm font-bold opacity-80 text-secondary-content mb-2 flex items-center" style="
+    color: crimson;
+">
                                     <i class="fas fa-calendar mr-2"></i> {{ cert.level2 }}
                                 </p>
                             </div>
@@ -600,7 +602,7 @@
         <footer class="footer footer-center p-10 bg-neutral text-neutral-content relative overflow-hidden "
             style="row-gap: 1rem;">
             <div class="absolute bottom-0 left-0 w-full opacity-10 text-9xl flex justify-between pointer-events-none">
-                <span>🌲</span><span>🪦</span><span>🌲</span>
+                <span>🌲</span><span>♟︎</span><span>🌲</span>
             </div>
 
             <aside class="z-10">
@@ -791,6 +793,14 @@
                 ]);
 
                 const certificates = ref([
+                    {
+                        title: 'การแข่งขันทักษะเทคโนโลยีสารสนเทศด้านโปรแกรมและเครือข่าย DevOps',
+                        level: 'ระดับ ปวส.',
+                        level2: 'ระดับชาติ',
+                        rank: 'รองชนะเลิศอันดับ 1',
+                        description: 'แข่งขันในบทบาท Web Developer (Full Stack) พัฒนา "ระบบลางานออนไลน์" ภายในเวลาที่กำหนด โดยออกแบบระบบครอบคลุมทั้งหน้าบ้านและหลังบ้าน มีระบบ Authentication ยืนยันตัวตนด้วย JWT จัดการ State ด้วย Pinia และเชื่อมต่อ API ด้วย Axios พร้อมทั้งวางผังการทำงาน (Flowchart, ER Diagram) และ Deploy งานด้วยกระบวนการ DevOps',
+                        image: './images/Awards/DevOpsLevel3.png'
+                    },
                     {
                         title: 'การแข่งขันทักษะเทคโนโลยีสารสนเทศด้านโปรแกรมและเครือข่าย DevOps',
                         level: 'ระดับ ปวส.',
